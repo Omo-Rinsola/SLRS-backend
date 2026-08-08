@@ -1,0 +1,24 @@
+# venv
+signvenv0/
+*.venv/
+venv/
+
+# python
+__pycache__/
+*.pyc
+
+# logs
+backend/logs/
+logs/
+*.log
+
+# large model artifacts and training data
+external/SignDETR/pretrained/
+external/SignDETR/data/
+external/SignDETR/logs/
+
+# env secrets
+.env
+
+# PyCharm
+.idea/
