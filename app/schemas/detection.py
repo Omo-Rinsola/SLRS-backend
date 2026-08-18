@@ -1,13 +1,9 @@
 from pydantic import BaseModel
-
-class FrameMessage(BaseModel):
-    """Frame from frontend"""
-    data: str
-
+from typing import Optional
 
 class DetectionResult(BaseModel):
     "ASL detection result sent to frontend"
-    sign: str
+    sign: Optional[str]
     confidence: float
     timestamp: str
 

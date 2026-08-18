@@ -1,5 +1,5 @@
 from fastapi import APIRouter, WebSocket
-from app.schemas.detection import FrameMessage, DetectionResult
+from app.schemas.detection import DetectionResult
 from app.ml.signdetr_handler import SignDETRHandler
 from app.utils.frame_decoder import decode_frame
 from datetime import datetime
@@ -22,8 +22,8 @@ async def websocket_detection(websocket: WebSocket):
         """
     await websocket.accept()
     while True:
-        message = FrameMessage(**await websocket.receive_json())
-        frame = decode_frame(message.data)
+        message = await websocket.receive_bytes()
+        frame = decode_frame(message)
 
 
         # DETECT IMAGE
