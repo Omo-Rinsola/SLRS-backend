@@ -1,0 +1,25 @@
+# venv
+signvenv0/
+*.venv/
+venv/
+
+# python
+__pycache__/
+*.pyc
+
+# logs
+logs/
+*.log
+
+# training data
+external/SignDETR/data/
+external/SignDETR/logs/
+
+# env secrets
+.env
+
+# PyCharm
+.idea/
+
+# tests
+tests/

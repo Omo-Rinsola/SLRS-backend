@@ -6,9 +6,13 @@ app = FastAPI(
     title="SignBridge",
 )
 
+ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+    "https://your-frontend.vercel.app"]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=ALLOWED_ORIGINS,
     allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
