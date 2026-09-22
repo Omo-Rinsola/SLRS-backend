@@ -1,25 +1,15 @@
 import torch
 import sys
 import json
-from pathlib import Path
 import albumentations as A
 
 
-# Add SignDETR to path
-# from external.SignDETR.src.utils.setup import get_classes
-# from
-
-signdetr_src_path = Path(__file__).parent.parent.parent / "external" / "SignDETR"/"src"
-sys.path.insert(0, str(signdetr_src_path))
-
-
-# Import with suppression for IDE
-from model import DETR
+from app.ml.vendor.model import DETR
 
 
 
 class SignDETRHandler:
-    def __init__(self, model_path: str = "external/SignDETR/pretrained/4426_model.pt"):
+    def __init__(self, model_path: str = "app/ml/vendor/pretrained/4426_model.pt"):
         """Load and initialize SignDETR model"""
         try:
             self.model = DETR(num_classes=3)
@@ -45,7 +35,7 @@ class SignDETRHandler:
 
 
     def get_classes(self):
-        config_path = Path(__file__).parent.parent.parent / "external" / "SignDETR" / "src" / "config.json"
+        config_path = "app/ml/vendor/config.json"
         try:
             with open(config_path) as f:
                 config = json.load(f)

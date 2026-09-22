@@ -13,12 +13,13 @@ logs/
 *.log
 
 # large model artifacts and training data
-external/SignDETR/pretrained/
-external/SignDETR/data/
-external/SignDETR/logs/
+app/ml/vendor/pretrained/
 
 # env secrets
 .env
 
 # PyCharm
 .idea/
+
+
+
