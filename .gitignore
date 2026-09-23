@@ -12,8 +12,7 @@ backend/logs/
 logs/
 *.log
 
-# large model artifacts and training data
-app/ml/vendor/pretrained/
+
 
 # env secrets
 .env
