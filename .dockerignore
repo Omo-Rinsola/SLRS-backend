@@ -12,8 +12,7 @@ logs/
 *.log
 
 # training data
-external/SignDETR/data/
-external/SignDETR/logs/
+
 
 # env secrets
 .env
