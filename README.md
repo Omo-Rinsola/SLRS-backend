@@ -18,38 +18,44 @@ Built as the backend for **SignBridge**, a real-time ASL recognition web app. Th
 - **Render** : hosting
 
 ## Architecture
-Frontend (browser)
-│ binary JPEG frames over WebSocket
-▼
-FastAPI WebSocket route (/detection/ws)
-│
-▼
-SignDETRHandler — decodes frame, runs inference
-│
-▼
-JSON response: { "sign": "...", "confidence": 0.95, "timestamp": "..." }
 
-# Project Structure
+```
+Frontend (browser)
+      │  binary JPEG frames over WebSocket
+      ▼
+FastAPI WebSocket route (/detection/ws)
+      │
+      ▼
+SignDETRHandler — decodes frame, runs inference
+      │
+      ▼
+JSON response: { "sign": "...", "confidence": 0.95, "timestamp": "..." }
+```
+
+## Project Structure
+
+```
 .
 ├── app/
-│ ├── ml/
-│ │ ├── signdetr_handler.py # loads model, runs inference
-│ │ └── vendor/ # vendored inference-only SignDETR code
-│ │ ├── model.py
-│ │ ├── config.json
-│ │ ├── pretrained/ # model weights (fetched at build time)
-│ │ └── utils/ # logging/display helpers
-│ ├── routers/
-│ │ └── detection.py # WebSocket route
-│ ├── schemas/
-│ │ └── detection.py # Pydantic response models
-│ └── utils/
-│ └── frame_decoder.py # bytes → image array
+│   ├── ml/
+│   │   ├── signdetr_handler.py   # loads model, runs inference
+│   │   └── vendor/                # vendored inference-only SignDETR code
+│   │       ├── model.py
+│   │       ├── config.json
+│   │       ├── pretrained/        # model weights (fetched at build time)
+│   │       └── utils/             # logging/display helpers
+│   ├── routers/
+│   │   └── detection.py           # WebSocket route
+│   ├── schemas/
+│   │   └── detection.py           # Pydantic response models
+│   └── utils/
+│       └── frame_decoder.py       # bytes → image array
 ├── tests/
-├── main.py # FastAPI app entrypoint
+├── main.py                        # FastAPI app entrypoint
 ├── requirements.txt
 ├── Dockerfile
 └── README.md
+```
 
 ## Local Development
 
@@ -71,7 +77,7 @@ docker build -t signbridge-backend .
 docker run -p 8000:8000 signbridge-backend
 ```
 
-The Docker build fetches pretrained model weights automatically from a GitHub Release during the build step — no manual download needed.
+The Docker build fetches pretrained model weights automatically from a GitHub Release during the build step, no manual download needed.
 
 ## WebSocket API
 
@@ -88,17 +94,13 @@ The Docker build fetches pretrained model weights automatically from a GitHub Re
 }
 ```
 
-## Configuration
-
-Allowed WebSocket origins are set in `app/routers/detection.py` and CORS origins in `main.py`. Update both when adding a new frontend deployment URL.
-
 ## Deployment
 
 Deployed on Render as a Docker web service, auto-deploying on every push to `main`. Health check: `GET /`.
 
 ## Model
 
-Inference uses a DETR (Detection Transformer) model with a ResNet-50 backbone, adapted for sign classification. Only the inference-relevant code (`model.py`, `config.json`, minimal logging utilities) is vendored into this repo — training code and datasets live in the full [SignDETR](https://github.com/<your-username>/SignDETR) repository.
+Inference uses a DETR (Detection Transformer) model with a ResNet-50 backbone, adapted for sign classification. Only the inference-relevant code (`model.py`, `config.json`, minimal logging utilities) is vendored into this repo — training code and datasets live in the full [SignDETR](https://github.com/Omo-Rinsola/SignDETR) repository.
 
 ## Acknowledgements
 
