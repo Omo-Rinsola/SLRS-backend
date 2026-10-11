@@ -8,7 +8,7 @@ app = FastAPI(
 
 ALLOWED_ORIGINS = [
     "http://localhost:5173",
-    "https://your-frontend.vercel.app"]
+    "https://signbridge-sigma-navy.vercel.app"]
 
 app.add_middleware(
     CORSMiddleware,

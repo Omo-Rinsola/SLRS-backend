@@ -6,7 +6,7 @@ from datetime import datetime
 
 ALLOWED_ORIGINS = {
     "http://localhost:5173",
-    "https://your-frontend.vercel.app",
+    "https://signbridge-sigma-navy.vercel.app",
 }
 
 router = APIRouter(
